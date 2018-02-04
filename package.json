@@ -1,0 +1,31 @@
+{
+  "name": "plex-watcher",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www",
+    "devstart": "export NODE_ENV=dev && nodemon ./bin/www"
+  },
+  "dependencies": {
+    "app-module-path": "^2.2.0",
+    "body-parser": "^1.18.2",
+    "child_process": "^1.0.2",
+    "cookie-parser": "~1.4.3",
+    "debug": "^3.1.0",
+    "dotenv": "^5.0.0",
+    "express": "^4.16.2",
+    "morgan": "^1.9.0",
+    "node-notifier": "^5.2.1",
+    "nodemailer": "^4.4.2",
+    "plex-api": "^5.2.0",
+    "pug": "~2.0.0-beta11",
+    "serve-favicon": "^2.4.5",
+    "winston": "^2.4.0"
+  },
+  "devDependencies": {
+    "eslint": "^4.17.0",
+    "eslint-plugin-jquery": "^1.3.0",
+    "eslint-plugin-react": "^7.6.1",
+    "nodemon": "^1.14.12"
+  }
+}
