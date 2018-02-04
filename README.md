@@ -4,8 +4,8 @@ Plex Watcher allows you to know when someone starts or stops watching movies on 
 ## Setup
 Dependency on Node. Download Node [here](https://nodejs.org/en/download/)
 
-Clone the repository by running: git clone https://github.com/gbourne1/plex-watcher.git
-Run: npm init
+* Clone the repository by running: git clone https://github.com/gbourne1/plex-watcher.git
+* Run: npm init
 
 ## Start the Plex Watcher
 Run: npm run start
@@ -19,8 +19,8 @@ The Plex settings requires your username, password, URL/IP of the Plex server, a
 You may also set the frequency of checking of activity by setting TIMER_MILLISECONDS. The default time is 5 minutes.
 
 ## Notifications
-If you want desktop notification, set SEND_NOTIFY=true otherwise set SEND_NOTIFY=false. 
-If you want an email notification, set SEND_EMAIL=ture otherwise set SEND_EMAIL=false.
+* If you want desktop notification, set SEND_NOTIFY=true otherwise set SEND_NOTIFY=false. 
+* If you want an email notification, set SEND_EMAIL=ture otherwise set SEND_EMAIL=false.
 
 ### Setting Email
 1. Enter the email service (i.e. gmail)
