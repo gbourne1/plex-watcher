@@ -1,8 +1,9 @@
 # plex-watcher
 Plex Watcher allows you to know when someone starts, stops, or pauses watching movies on your Plex server. You can be notifed via desktop notification or email. Also you can view the activity via the logs.
 
-## Setup
-Dependency on Node. Download Node [here](https://nodejs.org/en/download/)
+## Dependencies
+* Node: Download Node [here](https://nodejs.org/en/download/)
+* Git: If a Mac, should already be installed. If Windows, install from [here](http://gitforwindows.org/).
 
 * Clone the repository by running: git clone https://github.com/gbourne1/plex-watcher.git
 * Run: npm install
