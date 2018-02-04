@@ -17,10 +17,11 @@ const express = require('express'),
 	argv = require('yargs').argv;
 
 // Get arguments
-const userArgs = process.argv.slice(2);
 let logType = 'file';
-if (userArgs.includes('--v'))
+if (argv.v)
 	logType = 'all';
+else
+	console.log('not found: ' + argv.v);
 
 const log = require('utils/logger').winston('plex-watcher.js', true, logType),
 	logConsole = require('utils/logger').winston('', true);
@@ -41,7 +42,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Tail the logs to the browser
 app.get('/tail', (req, res) => {
-	let tail = spawn('tail', ['-f', '-n', '+1', './plex-watcher.log']);
+	let tail = spawn('tail', ['-f', '-n', '+1', path.join(__dirname, 'plex-watcher.log')]);
 	tail.stdout.pipe(res);
 });
 

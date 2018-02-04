@@ -1,5 +1,6 @@
 const winston = require('winston'),
-	util = require('util');
+	util = require('util'),
+	path = require('path');
 
 module.exports.winston = (env, pretty = false, type = 'all') => {
 	let consoleLog = new winston.transports.Console({
@@ -11,7 +12,7 @@ module.exports.winston = (env, pretty = false, type = 'all') => {
 	});
 
 	let fileLog = new winston.transports.File({
-		filename: 'plex-watcher.log'
+		filename: path.join(__dirname, 'plex-watcher.log')
 	});
 
 	let params = [];

@@ -1,6 +1,6 @@
 {
   "name": "plex-watcher",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "author": "Geoffrey Bourne",
   "preferGlobal": true,
   "license": "MIT",
