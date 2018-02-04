@@ -1,3 +1,5 @@
+#! /usr/bin/env node
+
 'use strict';
 
 require('app-module-path').addPath(__dirname);
@@ -13,7 +15,14 @@ const express = require('express'),
 	PlexAPI = require('plex-api'),
 	spawn = require('child_process').spawn;
 
-const log = require('utils/logger').winston('plex-watcher.js', true);
+// Get arguements
+const userArgs = process.argv.slice(2);
+let logType = 'file';
+if(userArgs.includes('--v'))
+	logType = 'all';
+
+const log = require('utils/logger').winston('plex-watcher.js', true, logType),
+	logConsole = require('utils/logger').winston('', true);
 
 const app = express();
 
@@ -35,7 +44,7 @@ app.get('/tail', (req, res) => {
 	let tail = spawn('tail', ['-f', '-n', '+1', './plex-watcher.log']);
 	tail.stdout.pipe(res);
 });
- 
+
 // Plex
 const plexClient = new PlexAPI({
 	hostname: process.env.PLEX_HOSTNAME,
@@ -44,8 +53,14 @@ const plexClient = new PlexAPI({
 	password: process.env.PLEX_PASSWORD
 });
 
+// Welcome Message
+logConsole.info('Welcome to plex-watcher');
+logConsole.info(`Starting watcher on: ${process.env.PLEX_HOSTNAME}`);
+logConsole.info('Use flag "--v" for verbose to the console');
+logConsole.info('See the logs live at: http://localhost:5000');
+
 var watcherPrevious = new Map();
-(function plexLoop () {
+(function plexLoop() {
 	plexClient.query('/status/sessions').then(result => {
 		//log.info(pretty(result));
 
@@ -64,36 +79,47 @@ var watcherPrevious = new Map();
 				state = video.Player.state;
 
 			let data = watcherPrevious.get(user);
-			if (data && data.title === title && (data.state === state || (data.state !== 'paused' && state !== 'playing') )) {
+			if (data && data.title === title && (data.state === state || (data.state !== 'paused' && state !== 'playing'))) {
 				if (state !== 'paused')
 					log.info(`${user} is still watching ${title}`);
 				else
 					log.info(`${user} is paused ${title}`);
 
-				watcherCurrent.set(user, {title, state});
+				watcherCurrent.set(user, {
+					title,
+					state
+				});
 			} else {
-				watcherCurrent.set(user, {title, state});
-				watcherStarted.set(user, {title, state});
+				watcherCurrent.set(user, {
+					title,
+					state
+				});
+				watcherStarted.set(user, {
+					title,
+					state
+				});
 			}
 		}
 
 		// Discover if stopped watching or paused
 		watcherPrevious.forEach((show, user) => {
 			let data = watcherCurrent.get(user);
-			if ( (data && data.title !== show.title) || (data.title === show.title && show.state === 'playing' && data.state === 'paused'))
-				watcherStopped.set(user, {title: data.title, state: data.state});
+			if ((data && data.title !== show.title) || (data.title === show.title && show.state === 'playing' && data.state === 'paused'))
+				watcherStopped.set(user, {
+					title: data.title,
+					state: data.state
+				});
 		});
 
 		// Send Messages
-		if(watcherStarted.size > 0 || watcherStopped.size > 0) {
+		if (watcherStarted.size > 0 || watcherStopped.size > 0) {
 			log.info(`Started or Stopped/Paused Watcher. Stopped/Pause: ${pretty(watcherStopped)} Started: ${ pretty(watcherStarted)}`);
 
-			if(process.env.SEND_NOTIFY === 'true')
+			if (process.env.SEND_NOTIFY === 'true')
 				doNotify(watcherStarted, watcherStopped);
-			if(process.env.SEND_EMAIL === 'true')
+			if (process.env.SEND_EMAIL === 'true')
 				doEmail(watcherStarted, watcherStopped);
-		}
-		else
+		} else
 			log.info('No started or stopped watchers');
 
 		// Assign current map to the previous map

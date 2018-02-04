@@ -1,7 +1,12 @@
 {
   "name": "plex-watcher",
-  "version": "0.0.1",
-  "private": true,
+  "version": "0.1.0",
+  "author": "Geoffrey Bourne",
+  "preferGlobal": true,
+  "license": "MIT",
+  "bin": {
+    "plex-watcher": "./bin/www"
+  },
   "scripts": {
     "start": "node ./bin/www",
     "devstart": "export NODE_ENV=dev && nodemon ./bin/www"

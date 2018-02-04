@@ -5,7 +5,7 @@ const nodemailer = require('nodemailer');
  * @param {array} mailOptions The Mail Options
  * @param {boolean} log true=log email, else don't
  */
-module.exports = function(mailOptions, log) {
+module.exports = function (mailOptions, log) {
 	let transporter = nodemailer.createTransport({
 		service: process.env.EMAIL_SERVICE,
 		port: process.env.EMAIL_PORT,
@@ -16,11 +16,11 @@ module.exports = function(mailOptions, log) {
 		}
 	});
 
-	transporter.sendMail(mailOptions, function(error, info){
+	transporter.sendMail(mailOptions, function (error, info) {
 		if (error) {
 			console.error(error);
 		} else {
-			if(log == true)
+			if (log == true)
 				console.log(`Email sent: ${ info.response }\nFrom: ${ mailOptions.from }\nTo: ${ mailOptions.to }\nSubject: ${ mailOptions.subject }\nText: ${ mailOptions.text }`);
 		}
 	});
