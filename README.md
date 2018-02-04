@@ -16,6 +16,8 @@ Run: npm run start
 
 The Plex settings requires your username, password, URL/IP of the Plex server, and port. The (either external or internal) and port can be found under Settings->Server->Remote Access.
 
+You may also set the frequency of checking of activity by setting TIMER_MILLISECONDS. The default time is 5 minutes.
+
 ## Notifications
 If you want desktop notification, set SEND_NOTIFY=true otherwise set SEND_NOTIFY=false. 
 If you want an email notification, set SEND_EMAIL=ture otherwise set SEND_EMAIL=false.
@@ -24,7 +26,7 @@ If you want an email notification, set SEND_EMAIL=ture otherwise set SEND_EMAIL=
 1. Enter the email service (i.e. gmail)
 2. The port (gmail is 465)
 3. Your email address
-4. The app password. You can either use your regualr password or if you have 2-FA enabled, generate an app password [here](https://myaccount.google.com/u/1/apppasswords)
+4. Your email password. You can either use your regular password or if you have 2-FA enabled, you must generate an app password [here](https://myaccount.google.com/u/1/apppasswords)
 
 ## Logs
 The logs can be viewed as a running tail [here](http://localhost:5000/tail)
