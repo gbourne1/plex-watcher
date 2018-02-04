@@ -10,7 +10,9 @@ Plex Watcher allows you to know when someone starts, stops, or pauses watching m
 * Run: npm install
 
 ## Start the Plex Watcher
-Run: npm run start
+* Run: npm run start
+* Use flag '--v' for verbose to the console
+
 
 ## Configure
 1. Copy the .env-example to .env
