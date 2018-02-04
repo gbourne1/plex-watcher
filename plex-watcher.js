@@ -13,12 +13,13 @@ const express = require('express'),
 	bodyParser = require('body-parser'),
 	pretty = require('utils/logger').pretty,
 	PlexAPI = require('plex-api'),
-	spawn = require('child_process').spawn;
+	spawn = require('child_process').spawn,
+	argv = require('yargs').argv;
 
-// Get arguements
+// Get arguments
 const userArgs = process.argv.slice(2);
 let logType = 'file';
-if(userArgs.includes('--v'))
+if (userArgs.includes('--v'))
 	logType = 'all';
 
 const log = require('utils/logger').winston('plex-watcher.js', true, logType),
@@ -38,24 +39,42 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-
 // Tail the logs to the browser
 app.get('/tail', (req, res) => {
 	let tail = spawn('tail', ['-f', '-n', '+1', './plex-watcher.log']);
 	tail.stdout.pipe(res);
 });
 
+/** Get the command line arguments ----- */
+// notify an email
+const notify = argv.notify ? argv.notify : process.env.SEND_NOTIFY,
+	emailSend = argv.emailSend ? argv.emailSend : process.env.SEND_EMAIL;
+
+// Email command line args
+process.env.EMAIL_SERVICE = argv.email ? argv.email : process.env.EMAIL_SERVICE,
+process.env.EMAIL_PORT = argv.emailPort ? argv.emailPort : process.env.EMAIL_PORT,
+process.env.EMAIL_ADDRESS = argv.emailAddress ? argv.emailAddress : process.env.EMAIL_ADDRESS,
+process.env.EMAIL_PASSWORD = argv.emailPassword ? argv.emailPassword : process.env.EMAIL_PASSWORD;
+
+// see if command line arguments
+const hostname = argv.hostname ? argv.hostname : process.env.PLEX_HOSTNAME,
+	port = argv.port ? argv.port : process.env.PLEX_PORT,
+	username = argv.username ? argv.username : process.env.PLEX_USERNAME,
+	password = argv.password ? argv.password : process.env.PLEX_PASSWORD,
+	timer = argv.timer ? argv.timer : process.env.TIMER_MILLISECONDS;
+// ---------------------------------------
+
 // Plex
 const plexClient = new PlexAPI({
-	hostname: process.env.PLEX_HOSTNAME,
-	port: process.env.PLEX_PORT,
-	username: process.env.PLEX_USERNAME,
-	password: process.env.PLEX_PASSWORD
+	hostname,
+	port,
+	username,
+	password
 });
 
 // Welcome Message
 logConsole.info('Welcome to plex-watcher');
-logConsole.info(`Starting watcher on: ${process.env.PLEX_HOSTNAME}`);
+logConsole.info(`Starting watcher on: ${hostname}`);
 logConsole.info('Use flag "--v" for verbose to the console');
 logConsole.info('See the logs live at: http://localhost:5000');
 
@@ -115,9 +134,9 @@ var watcherPrevious = new Map();
 		if (watcherStarted.size > 0 || watcherStopped.size > 0) {
 			log.info(`Started or Stopped/Paused Watcher. Stopped/Pause: ${pretty(watcherStopped)} Started: ${ pretty(watcherStarted)}`);
 
-			if (process.env.SEND_NOTIFY === 'true')
+			if (notify === 'true')
 				doNotify(watcherStarted, watcherStopped);
-			if (process.env.SEND_EMAIL === 'true')
+			if (emailSend === 'true')
 				doEmail(watcherStarted, watcherStopped);
 		} else
 			log.info('No started or stopped watchers');
@@ -131,7 +150,7 @@ var watcherPrevious = new Map();
 
 	setTimeout(() => {
 		plexLoop();
-	}, process.env.TIMER_MILLISECONDS);
+	}, timer);
 })();
 
 function doNotify(watcherStarted, watcherStopped) {

@@ -25,7 +25,8 @@
     "plex-api": "^5.2.0",
     "pug": "~2.0.0-beta11",
     "serve-favicon": "^2.4.5",
-    "winston": "^2.4.0"
+    "winston": "^2.4.0",
+    "yargs": "^11.0.0"
   },
   "devDependencies": {
     "eslint": "^4.17.0",
