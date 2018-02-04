@@ -5,6 +5,7 @@ Plex Watcher allows you to know when someone starts, stops, or pauses watching m
 * Node: Download Node [here](https://nodejs.org/en/download/)
 * Git: If a Mac, should already be installed. If Windows, install from [here](http://gitforwindows.org/).
 
+## Get the code
 * Clone the repository by running: git clone https://github.com/gbourne1/plex-watcher.git
 * Run: npm install
 
@@ -23,7 +24,7 @@ You may also set the frequency of checking of activity by setting TIMER_MILLISEC
 * If you want desktop notification, set SEND_NOTIFY=true otherwise set SEND_NOTIFY=false. 
 * If you want an email notification, set SEND_EMAIL=ture otherwise set SEND_EMAIL=false.
 
-### Setting Email
+### Setting email
 1. Enter the email service (i.e. gmail)
 2. The port (gmail is 465)
 3. Your email address
