@@ -6,7 +6,7 @@ Plex Watcher allows you to know when someone starts, stops, or pauses watching m
 * Run npm i -g plex-watcher
 
 ### Run
-* Run: plex-watcher
+* Run: plex-watcher [arguments]
 * Either configure the .env (see below) or use the command line arguments
 * Run with arguments example: plex-watcher --hostname=192.168.1.1 --port=35000 --username=myname --password=12345 --notify=true --emailSend=true --email=gmail --emailPort=465 --emailAddress=my@email.com --emailPassword=s2edwd223 --timer=5000 --v
 * If argument not found, will look for them in the .env file
