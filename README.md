@@ -3,7 +3,7 @@ Plex Watcher allows you to know when someone starts, stops, or pauses watching m
 
 ## Dependencies
 * Node: Download Node [here](https://nodejs.org/en/download/)
-* Git: If a Mac, should already be installed. If Windows, install from [here](http://gitforwindows.org/).
+* Git: If a Mac, should already be installed. If Windows, install from [here](https://git-scm.com/download/win).
 
 ## Get the code
 * Clone the repository by running: git clone https://github.com/gbourne1/plex-watcher.git
