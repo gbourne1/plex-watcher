@@ -8,7 +8,7 @@ Plex Watcher allows you to know when someone starts, stops, or pauses watching m
 ### Run
 * Run: `plex-watcher [arguments]`
 * Either configure the .env (see below) or use the command line arguments
-* Run with arguments example: `plex-watcher --hostname=192.168.1.1 --port=35000 --username=myname --password=12345 --notify=true --emailSend=true --email=gmail --emailPort=465 --emailAddress=my@email.com --emailPassword=s2edwd223 --timer=5000 --v`
+* Run with arguments example: `plex-watcher --v --hostname=192.168.1.1 --port=35000 --username=myname --password=12345 --notify=true --emailSend=true --email=gmail --emailPort=465 --emailAddress=my@email.com --emailPassword=s2edwd223 --timer=5000`
 * If argument not found, will look for them in the .env file
 * Use flag '--v' for verbose to the console
 
@@ -22,7 +22,7 @@ Plex Watcher allows you to know when someone starts, stops, or pauses watching m
 
 ### Start the Plex Watcher
 * Run: npm run start
-* Use -- before arguments. For example: `npm run start -- --hostname=192.168.1.1 --port=35000 --username=myname --password=12345 --notify=true --emailSend=true --email=gmail --emailPort=465 --emailAddress=my@email.com --emailPassword=s2edwd223 --timer=5000`
+* Use -- before arguments. For example: `npm run start -- --v --hostname=192.168.1.1 --port=35000 --username=myname --password=12345 --notify=true --emailSend=true --email=gmail --emailPort=465 --emailAddress=my@email.com --emailPassword=s2edwd223 --timer=5000`
 * Use flag '--v' for verbose to the console
 
 ## Configure .env
