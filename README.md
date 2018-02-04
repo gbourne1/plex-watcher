@@ -5,7 +5,7 @@ Plex Watcher allows you to know when someone starts, stops, or pauses watching m
 Dependency on Node. Download Node [here](https://nodejs.org/en/download/)
 
 * Clone the repository by running: git clone https://github.com/gbourne1/plex-watcher.git
-* Run: npm init
+* Run: npm install
 
 ## Start the Plex Watcher
 Run: npm run start
