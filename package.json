@@ -1,9 +1,10 @@
 {
   "name": "plex-watcher",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "author": "Geoffrey Bourne",
   "preferGlobal": true,
   "license": "MIT",
+  "keywords": ["plex", "watch", "watcher"],
   "bin": {
     "plex-watcher": "./bin/www"
   },
