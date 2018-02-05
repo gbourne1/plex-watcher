@@ -1,11 +1,14 @@
 {
   "name": "plex-watcher",
-  "version": "0.1.4",
+  "version": "0.1.6",
   "author": "Geoffrey Bourne",
   "preferGlobal": true,
   "license": "MIT",
   "keywords": ["plex", "watch", "watcher", "tv", "movies", "media", "PMS"],
-  "url": "https://github.com/gbourne1/plex-watcher",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gbourne1/plex-watcher.git"
+  },
   "bin": {
     "plex-watcher": "./bin/www"
   },
