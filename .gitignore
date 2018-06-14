@@ -1,3 +1,4 @@
 node_modules/
+.1env
 .env
 plex-watcher.log

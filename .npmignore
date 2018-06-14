@@ -1,5 +1,6 @@
 node_modules/
 .env
+.1env
 plex-watcher.log
 .vscode/
 tasks.json
